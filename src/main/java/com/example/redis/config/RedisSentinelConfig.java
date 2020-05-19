@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * @ClassName RedisSentinelConfig
- * @Author yamei
+ * @Author kris
  * @Date 2020/5/12
  **/
 @Configuration
