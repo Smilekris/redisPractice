@@ -3,6 +3,7 @@ package com.example.redis.config;
 import com.example.redis.entity.HighTecoEntity;
 import com.example.redis.service.HighTecoService;
 import com.example.redis.service.impl.RedisService;
+import com.example.redis.taskpool.MunalTaskPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -39,12 +40,14 @@ public class initBloomFliter implements CommandLineRunner {
                 public void run() {
                     for(int j =0;j<rowsNum;j++){
                         HighTecoEntity highTecoEntity = list.get((key - 1) + j);
-                        redisService.addByBloomFilter();
+                        redisService.addByBloomFilter(bloomFilterHelper,highTecoEntity.getId()+"",highTecoEntity.getId()+"");
                     }
+                    countDownLatch.countDown();
                 }
             };
-            ;
+            MunalTaskPool.getInstance().execute(runnable);
         }
-        redisService.addByBloomFilter(bloomFilterHelper,);
+        countDownLatch.await();
+        System.out.println("finish import");
     }
 }
