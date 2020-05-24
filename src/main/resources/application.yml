@@ -1,6 +1,5 @@
 spring:
   redis:
-    password: 123456
     jedis:
       pool:
         #最大连接数
@@ -14,6 +13,8 @@ spring:
     sentinel:
       master: mymaster
       nodes: 192.168.228.1:10001,192.168.228.1:10002,192.168.228.1:10003
+    password: 123456
+    database: 0
   datasource:
     　　type: com.alibaba.druid.pool.DruidDataSource   #配置当前要使用的数据源的操作类型那个
     　　driver-class-name: org.gjt.mm.mysql.Driver       #配置MySQL的驱动程序类
