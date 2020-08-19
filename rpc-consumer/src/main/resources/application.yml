@@ -1,0 +1,27 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 9010
+spring:
+  application:
+    name: block-dubbo-consume
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://127.0.0.1:3306/high_t_concurrency?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    filters: stat,wall,log4j
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 2000
+      max-wait-millis: 200
+dubbo:
+  application:
+    name: ym-dubbo-consume
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
